@@ -3,8 +3,9 @@ version: 0.2
 phases:
   build:
     commands:
-      - make -C /code build-code env=$env
+      - make -C /code NODE_OPTIONS=--max-old-space-size=2048 build-code env=$env
   post_build:
     commands:
+      - bash -c "if [ /"$CODEBUILD_BUILD_SUCCEEDING/" == /"0/" ]; then exit 1; fi"
       - make -C /code deploy-code env=$env
       - make -C /code invalidate-cache env=$env

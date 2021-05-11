@@ -14,3 +14,7 @@ variable "project_name" {
 variable "cloudfront_id" {
   type = string
 }
+variable "build_timeout" {
+  type    = number
+  default = 15
+}

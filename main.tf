@@ -12,6 +12,7 @@ module "codebuild-project-publish-front" {
   name           = local.name
   image          = module.ecr.image_latest
   buildspec_file = "${path.module}/buildspec.yml"
+  build_timeout  = var.build_timeout
   variables      = {
     env                                  = var.env
     "AWS_CLOUDFRONT_DISTRIBUTION_ID_${upper(var.name)}" = var.cloudfront_id
